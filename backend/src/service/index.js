@@ -1,5 +1,9 @@
-const user = require('./user');
+const media = require("./media");
+const track = require("./track");
+const album = require("./album");
 
 module.exports = {
-  user,
+  media,
+  track,
+  album
 };

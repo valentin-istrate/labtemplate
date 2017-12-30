@@ -1,18 +1,16 @@
 {
   "development": {
-    "username": "postgres",
-    "password": null,
-    "database": "devdb",
-    "host": "127.0.0.1",
-    "port": 32768,
-    "dialect": "postgres"
+    "username": "web.admin",
+    "password": "pass",
+    "server": "DESKTOP-RCID66O",
+    "database": "web",
+    "dialect": "mssql"
   },
   "production": {
-    "username": "postgres",
-    "password": null,
-    "database": "devdb",
-    "host": "127.0.0.1",
-    "port": 32768,
-    "dialect": "postgres"
+    "username": "web.admin",
+    "password": "pass",
+    "server": "DESKTOP-RCID66O",
+    "database": "web",
+    "dialect": "mssql"
   }
 }
