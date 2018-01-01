@@ -8,13 +8,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      TrackNumber: {
+      trackNumber: {
         type: Sequelize.INTEGER
       },
-      FileName: {
+      fileName: {
         type: Sequelize.STRING
       },
-      TrackName: {
+      trackName: {
         type: Sequelize.STRING
       },
       createdAt: {
@@ -25,7 +25,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },      
-      AlbumId: {
+      albumId: {
         type: Sequelize.INTEGER,
         onDelete: "CASCADE",
         allowNull:false,

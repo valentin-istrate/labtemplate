@@ -1,9 +1,9 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
   var Album = sequelize.define("Album", {
-    AlbumName: DataTypes.STRING,
-    BandName: DataTypes.STRING,
-    CoverFileName: DataTypes.STRING
+    albumName: DataTypes.STRING,
+    bandName: DataTypes.STRING,
+    coverFileName: DataTypes.STRING
   });
 
   Album.associate = function(models) {

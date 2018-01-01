@@ -8,13 +8,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      AlbumName: {
+      albumName: {
         type: Sequelize.STRING
       },
-      BandName: {
+      bandName: {
         type: Sequelize.STRING
       },
-      CoverFileName: {
+      coverFileName: {
         type: Sequelize.STRING
       },
       createdAt: {

@@ -1,9 +1,9 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
   var Track = sequelize.define("Track", {
-    TrackNumber: DataTypes.INTEGER,
-    FileName: DataTypes.STRING,
-    TrackName: DataTypes.STRING
+    trackNumber: DataTypes.INTEGER,
+    fileName: DataTypes.STRING,
+    trackName: DataTypes.STRING
   });
 
   Track.associate = function(models) {

@@ -7,7 +7,7 @@ exports.findByAlbumId = function(req, res) {
   track
     .findAll({
       where: {
-        AlbumId: id
+        albumId: id
       }
     })
     .then(tracks => {
