@@ -1,0 +1,4 @@
+create database entries
+	script for importing into database maybe?
+update backend to return albums ordered by bandname then by albumname
+update backend to return tracks ordered by tracknumber

@@ -1,0 +1,184 @@
+#VRML V2.0 utf8
+Group {
+    children [
+        Viewpoint {
+            position   -20 7 25
+            orientation 0 1 0 -0.4
+        }
+
+        Background { skyColor [0.65, 0.86, 0.99]}
+
+        PointLight { location 10 0 10 }
+
+        Shape {
+            appearance Appearance {
+                material Material { transparency  0.2 }
+            }
+            geometry Box { 
+                size 60.0 0.5 20.0
+            }
+        }
+        DEF CarTransform Transform {
+            translation  20.0  1.1 0.0
+            children [
+                Shape {                                        
+                    appearance DEF BaseAppearance Appearance {
+                        material DEF BaseMaterial Material { 
+                            diffuseColor    0.0  0.0  1.0
+                        }
+                    }
+                    geometry Box {
+						size 4.2 0.9 1.8
+					}
+                }
+				Transform {                 
+                    translation  0.95 0.7 0.0
+                    children [
+						Shape {  
+							appearance DEF WindowAppearance Appearance {
+								material DEF WindowMaterial Material{
+									diffuseColor 0.8  0.8  0.8  
+								}
+							}                                    
+                    		geometry Box {
+								size 2.3 0.5 1.8
+							}
+                		}
+					]
+				}
+				Transform {                 
+                    translation  -0.65 0.45 0.0
+                    children [
+						Shape { 
+							appearance Appearance	{
+								material USE WindowMaterial
+							}				
+                    		geometry IndexedFaceSet {
+								coord Coordinate {
+									point [ -0.45 0 -0.9,
+											-0.45 0 0.9,
+											0.45 0 0.9,
+											0.45 0 -0.9,
+											0.45 0.5 0.9,
+											0.45 0.5 -0.9
+									]
+								}
+								coordIndex [ 0, 1, 2, 3, -1,
+											0, 1, 4, 5, -1,
+											1, 2, 4, -1,											
+											2, 3, 5, 4, -1,
+											0, 3, 5, -1
+											]  
+								solid FALSE
+
+							}
+                		}
+					]
+				}
+				Transform {                 
+                    translation  -1.2 -0.45 0.9
+					rotation 1 0 0 1.57 
+                    children [
+						DEF WheelTransform Transform 
+						{	
+							children [
+								DEF	Wheel Shape{
+              						appearance Appearance {
+                                		texture ImageTexture {url "wheel.jpg"}
+									}						
+                    				geometry Cylinder {
+										radius 0.4
+										height 0.20
+									}
+					  			}
+							]							
+                		}
+					]
+				}
+
+				Transform {                 
+                    translation  -1.2 -0.45 -0.9
+					rotation 1 0 0 1.57 
+                    children [
+						USE WheelTransform 						
+					]
+				}
+				Transform {                 
+                    translation  1.3 -0.45 0.9
+					rotation 1 0 0 1.57 
+                    children [
+						USE	WheelTransform					
+					]
+				}
+				Transform {                 
+                    translation  1.3 -0.45 -0.9
+					rotation 1 0 0 1.57 
+                    children [
+						USE	WheelTransform					
+					]
+				}
+
+			   Transform {                 
+                    translation  -2.1  0.1  0.70 
+					rotation 0 0 1 1.57  
+                    children [
+                        DEF Light Shape {
+							appearance Appearance {
+								material DEF LightMaterial Material {
+									diffuseColor 1.0 1.0 1.0
+								}
+							}                                 
+                            geometry Cylinder { 
+								radius 0.15
+								height 0.1
+							}
+                        }
+                    ]
+                }
+			 	Transform {                 
+                    translation  -2.1  0.1 -0.70 
+					rotation 0 0 1 1.57  
+                    children [
+                        USE	Light
+                    ]
+				}
+                   
+            ]
+        }   
+
+        DEF Clock TimeSensor {
+            cycleInterval 0.5     
+            loop          TRUE      
+        }
+
+		DEF Clock5sec TimeSensor {
+            cycleInterval 5.0     
+            loop          TRUE      
+        }
+
+        DEF LightColor ColorInterpolator { 
+            key       [0.0,         0.33,        0.66,        1.0]
+            keyValue  [1.0 1.0 1.0, 1.0 1.0 0.0, 1.0 1.0 1.0, 1.0 1.0 0.0 ] 
+        }
+		DEF WheelRotation OrientationInterpolator {
+            key      [0.0,              0.25,             0.5,              0.75,             1.0]
+            keyValue [0.0 1.0 0.0 0.00, 0.0 1.0 0.0 1.57, 0.0 1.0 0.0 3.14, 0.0 1.0 0.0 4.71, 0.0 1.0 0.0 6.28]
+        }
+		DEF CarMove PositionInterpolator {
+            key      [0.0,          0.25,         0.5,      	0.75,         1.0]
+            keyValue [20.0 1.1 0.0, 10.0 1.1 0.0, 0.0 1.1 0.0, -10.0 1.1 0.0, -20.0 1.1 0.0]
+        }
+
+    ]
+}
+
+
+ROUTE Clock5sec.fraction_changed TO LightColor.set_fraction
+ROUTE LightColor.value_changed TO LightMaterial.set_diffuseColor
+ROUTE LightColor.value_changed TO LightMaterial.set_emissiveColor
+
+ROUTE Clock.fraction_changed TO WheelRotation.set_fraction
+ROUTE WheelRotation.value_changed TO WheelTransform.set_rotation
+
+ROUTE Clock5sec.fraction_changed TO CarMove.set_fraction
+ROUTE CarMove.value_changed TO CarTransform.set_translation
